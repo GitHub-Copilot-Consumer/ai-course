@@ -1,0 +1,47 @@
+schema: spec-driven
+
+context: |
+  schema: spec-driven
+  tdd: true
+  context: |
+    Language: 繁體中文
+    Framework: Hugo
+    
+    Use `trunk-based development` strategy.
+    ADR is store in openspec/adr folder
+    When finish tasks, please sync README.md.
+  
+  rules:
+    proposal:
+      - Please check adr first, DO NOT break adr.
+    specs:
+      - Be explicit about mechanisms, not just outcomes (say HOW, not just WHAT)
+      - If we generate artifacts, specify deletion/modification by explicit list lookup, not pattern matching
+    tasks:
+      - Be sure to follow Test-Driven Development, make sure total coverage is greater than 80%.
+      - To complete each task, use `git commit` as appropriate for the context, and follow the rules of conventional commit and atomic commit.
+    design:
+      - Use existing constants and lists - don't invent detection mechanisms
+      - Prefer explicit lookups over pattern matching or regex
+      - If we generate it, we track it by name in a constant
+      - Focus on creating software that is readable, maintainable, and simple, follow clean code principles.
+locale: tw
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
