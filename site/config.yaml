@@ -1,0 +1,20 @@
+baseURL: "https://example.com/"
+languageCode: "en-us"
+title: "Course Site"
+theme: "hugo-book"
+
+params:
+  description: "Course materials, assignments, and resources."
+  site_author: "Course Team"
+
+menu:
+  main:
+    - name: "Lessons"
+      url: "/lessons/"
+      weight: 10
+    - name: "Assignments"
+      url: "/assignments/"
+      weight: 20
+    - name: "Resources"
+      url: "/resources/"
+      weight: 30
