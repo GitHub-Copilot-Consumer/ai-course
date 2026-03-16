@@ -1,6 +1,6 @@
 ---
 title: "0. 課前暖身：AI 輔助開發的現況與痛點"
-weight: 0
+weight: 1
 description: 建立共同語言，理解為何單純的「對話式 AI」已不足以應對企業級開發。
 showToc: true
 ---

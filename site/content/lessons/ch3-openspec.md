@@ -1,6 +1,6 @@
 ---
 title: "3. (實戰) OpenSpec 與 OPSX 工作流"
-weight: 3
+weight: 4
 description: 本課程核心。學習如何透過標準化指令引導 AI 完成從規劃到歸檔的全流程。
 showToc: true
 ---

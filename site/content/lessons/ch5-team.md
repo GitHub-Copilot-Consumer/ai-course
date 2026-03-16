@@ -1,6 +1,6 @@
 ---
 title: "5. 團隊導入策略與最佳實踐"
-weight: 5
+weight: 6
 description: 如何將個人生產力轉化為團隊規範。
 showToc: true
 ---

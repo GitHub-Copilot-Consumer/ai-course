@@ -1,6 +1,6 @@
 ---
 title: "2. 解決雜亂無章：引入 SDD (Spec-Driven Development)"
-weight: 2
+weight: 3
 description: 為何 TDD (測試驅動) 在 AI 時代不夠用？因為 AI 需要明確的「做什麼」(What) 而非僅是驗證「對不對」。
 showToc: true
 ---

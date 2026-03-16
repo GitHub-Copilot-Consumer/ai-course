@@ -1,6 +1,6 @@
 ---
 title: "1. GitHub Copilot Chat：從「對話」到「生產力」"
-weight: 1
+weight: 2
 description: 掌握 AI 工具的底層邏輯與進階指令，提升對話精準度。
 showToc: true
 ---

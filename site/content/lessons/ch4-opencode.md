@@ -1,6 +1,6 @@
 ---
 title: "4. 跨越生態系：從 Copilot 遷移至 OpenCode"
-weight: 4
+weight: 5
 description: 企業如何擺脫供應商鎖定 (Vendor Lock-in) 並落實資料隱私。
 showToc: true
 ---
