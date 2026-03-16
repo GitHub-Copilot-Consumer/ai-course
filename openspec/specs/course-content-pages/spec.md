@@ -132,36 +132,26 @@ code:
 
 ---
 ### Requirement: 各章節內容頁面
-系統 SHALL 建立以下明確命名的 7 個章節頁面（新增導言章節），每個頁面對應課程大綱的一個章節：
+系統 SHALL 維護以下明確命名的章節頁面（同 existing spec），且每個頁面正文 MUST 包含對應章節的完整內容，具體要求如下：
 
-| 檔案路徑 | 對應章節 |
-|----------|---------|
-| `hugo/content/chapters/ch-intro-ai.md` | 導言：理解 Model、Agent 與 Coding Agent |
-| `hugo/content/chapters/ch0-warmup.md` | 0. 課前暖身：AI 輔助開發的現況與痛點 |
-| `hugo/content/chapters/ch1-copilot.md` | 1. GitHub Copilot Chat：從「對話」到「生產力」 |
-| `hugo/content/chapters/ch2-sdd.md` | 2. 解決雜亂無章：引入 SDD (Spec-Driven Development) |
-| `hugo/content/chapters/ch3-openspec.md` | 3. (實戰) OpenSpec 與 OPSX 工作流 |
-| `hugo/content/chapters/ch4-opencode.md` | 4. 跨越生態系：從 Copilot 遷移至 OpenCode |
-| `hugo/content/chapters/ch5-team.md` | 5. 團隊導入策略與最佳實踐 |
+| 檔案路徑 | 最小行數 | 必含內容 |
+|----------|---------|---------|
+| `site/content/lessons/ch0-warmup.md` | 100 行 | 學習目標段落、三階段演進各含代表工具、災難現場含解法 |
+| `site/content/lessons/ch1-copilot.md` | 150 行 | Context 控制操作說明、Prompt 壞/好對比、copilot-instructions.md 範本、Lab 逐步步驟 |
+| `site/content/lessons/ch2-sdd.md` | 130 行 | TDD vs SDD 對比表格、openspec 初始化步驟含輸出、CI/CD 整合 GitHub Actions 範本 |
+| `site/content/lessons/ch3-openspec.md` | 200 行 | 每個 OPSX 指令的輸出範例、環境初始化目錄結構圖、Lab A 完整 5 步驟、多工並行示意 |
+| `site/content/lessons/ch4-opencode.md` | 150 行 | 安裝步驟含 API Key 設定、Ollama 安裝流程、Plan/Build 模式切換、Lab 離線步驟 |
+| `site/content/lessons/ch5-team.md` | 150 行 | 模型決策樹流程圖、openspec 目錄 tree 格式、Roadmap 含負責角色、人機協作表格 |
 
-每個章節頁面的 front matter MUST 包含：
-- `title`：對應章節完整標題
-- `weight`：對應章節排序數值（導言為 -1，ch0 為 0，ch1~ch5 為 1~5）
-- `description`：章節引言
+每個章節頁面的 front matter MUST 保持不變（`title`、`weight`、`description`、`showToc: true`）。
 
-每個章節頁面正文 MUST 包含對應章節的完整內容（含子節、列點、表格）。
+#### Scenario: 章節頁面內容完整性 - ch3
+- **WHEN** 讀取 `site/content/lessons/ch3-openspec.md`
+- **THEN** 正文 MUST 包含 `/opsx:apply` 指令的 code block 輸出範例，且總行數 MUST 不少於 200 行
 
-#### Scenario: 章節頁面集合完整性
-- **WHEN** 列出 `hugo/content/chapters/` 目錄
-- **THEN** MUST 包含 `_index.md`、`ch-intro-ai.md`、`ch0-warmup.md`、`ch1-copilot.md`、`ch2-sdd.md`、`ch3-openspec.md`、`ch4-opencode.md`、`ch5-team.md` 共 8 個檔案（_index.md + 7 個章節頁面）
-
-#### Scenario: 導言章節排序在最前
-- **WHEN** Hugo 以 weight 排序 `hugo/content/chapters/` 的頁面
-- **THEN** `ch-intro-ai.md`（weight: -1）MUST 排在 `ch0-warmup.md`（weight: 0）之前
-
-#### Scenario: 章節頁面 front matter 正確
-- **WHEN** 讀取 `hugo/content/chapters/ch3-openspec.md`
-- **THEN** front matter MUST 包含 `title`（含「OpenSpec」字串）、`weight: 3`、`description` 等欄位
+#### Scenario: 章節頁面 front matter 不變
+- **WHEN** 讀取任意一個 `site/content/lessons/ch*.md`
+- **THEN** front matter MUST 包含原有 `title`、`weight`、`description`、`showToc: true` 欄位，且值與原本一致
 
 
 <!-- @trace

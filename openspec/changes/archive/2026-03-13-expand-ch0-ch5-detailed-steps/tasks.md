@@ -48,4 +48,4 @@
 
 - [x] 7.1 在 `site/` 目錄執行 `hugo build`，確認建置成功無錯誤
 - [x] 7.2 確認 6 個章節頁面的 front matter（title、weight、description、showToc）均未被修改
-- [ ] 7.3 git commit：`chore: verify hugo build after ch0-ch5 content expansion`
+- [x] 7.3 git commit：`chore: verify hugo build after ch0-ch5 content expansion`
