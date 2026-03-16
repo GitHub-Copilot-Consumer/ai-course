@@ -6,7 +6,7 @@
 
 ## Hugo 靜態網站
 
-本專案包含以 [Hugo](https://gohugo.io/) 建置的課程網站，位於 `site/` 目錄，使用 [hugo-book](https://github.com/alex-shpak/hugo-book) 主題。
+本專案包含以 [Hugo](https://gohugo.io/) 建置的課程網站，位於 `site/` 目錄，使用 [Hextra](https://github.com/imfing/hextra) 主題（Hugo Module）。
 
 ### 目錄結構
 
@@ -26,22 +26,26 @@ site/
 │   ├── assignments/           # 作業
 │   └── resources/
 │       └── commands.md        # 常用 OPSX 指令速查
-├── themes/hugo-book/          # Hugo Book 主題 (git submodule)
+├── themes/                    # (不使用 submodule，主題由 Hugo Module 管理)
 └── config.yaml                # Hugo 設定檔
 ```
 
 ### 本機開發
 
-**前置需求：** Hugo v0.120+ extended
+**前置需求：** Hugo v0.120+ extended、Go 1.21+
 
 ```bash
-# 初次 clone 需初始化 submodule
-git submodule update --init --recursive
-
-# 啟動本機開發伺服器
+# 啟動本機開發伺服器（Hugo Module 會自動下載 Hextra 主題）
 hugo server -s site/
 
 # 瀏覽 http://localhost:1313
+```
+
+### 更新主題
+
+```bash
+# 更新 Hextra 至最新版本
+hugo mod get -u github.com/imfing/hextra
 ```
 
 ### 建置
