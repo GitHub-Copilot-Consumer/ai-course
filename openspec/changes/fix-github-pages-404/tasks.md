@@ -12,9 +12,9 @@
 ## 3. 測試驗證
 
 - [x] 3.1 push 至 `main` branch，觸發 GitHub Actions workflow
-- [ ] 3.2 確認 Actions 執行成功（無 build error、無 deploy error）
-- [ ] 3.3 確認 `gh-pages` branch 根目錄出現 `.nojekyll` 檔案（執行 `git fetch origin && git show origin/gh-pages:.nojekyll`）
-- [ ] 3.4 等待 GitHub Pages 更新（通常 1-2 分鐘），存取 `https://github-copilot-consumer.github.io/ai-sdd-course/`，確認回傳 200 而非 404
+- [x] 3.2 確認 Actions 執行成功（無 build error、無 deploy error）
+- [x] 3.3 確認 `gh-pages` branch 根目錄出現 `.nojekyll` 檔案（執行 `git fetch origin && git show origin/gh-pages:.nojekyll`）
+- [x] 3.4 等待 GitHub Pages 更新（通常 1-2 分鐘），存取 `https://github-copilot-consumer.github.io/ai-sdd-course/`，確認回傳 200 而非 404
 
 ## 4. 同步文件
 
