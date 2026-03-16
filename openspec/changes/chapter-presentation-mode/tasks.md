@@ -28,21 +28,21 @@
 - [x] 4.2 實作 `exitPresentation()` 函式：從 DOM 移除 `#presentation-overlay`、呼叫 `document.exitFullscreen()`（若當前為全螢幕）、移除鍵盤事件監聽器
 - [x] 4.3 監聽 `fullscreenchange` 事件：當 `document.fullscreenElement` 為 null 時自動呼叫 `exitPresentation()`（處理瀏覽器原生 Escape 退出）
 - [x] 4.4 為進退場撰寫整合測試：驗證進入後 overlay 存在、退出後 overlay 移除、退出後鍵盤事件解除
-- [ ] 4.5 git commit: `feat: implement enter/exit fullscreen presentation mode`
+- [x] 4.5 git commit: `feat: implement enter/exit fullscreen presentation mode`
 
 ## 5. Hugo Layout 覆寫
 
 - [x] 5.1 建立 `site/layouts/lessons/single.html`，繼承 hextra baseof 結構，在 `.content` 標題區域注入 `<button id="btn-enter-presentation">簡報模式</button>`
 - [x] 5.2 在 `single.html` 末尾以 `{{ partial "presentation-mode.html" . }}` 引入簡報 partial
 - [x] 5.3 在 `presentation-mode.html` 中加入簡報覆蓋層與投影片的 CSS 樣式（`position: fixed`、全螢幕排版、導覽按鈕樣式、進度指示器樣式）
-- [ ] 5.4 git commit: `feat: add lessons single layout with presentation mode button`
+- [x] 5.4 git commit: `feat: add lessons single layout with presentation mode button`
 
 ## 6. 建置驗證與整合測試
 
-- [ ] 6.1 執行 `hugo --source site` 確認靜態網站建置無錯誤
-- [ ] 6.2 撰寫端到端測試：以 Playwright 開啟本地建置後的章節頁面，驗證按鈕存在、點擊後 overlay 出現、導覽按鈕可正常切換投影片
-- [ ] 6.3 確認測試覆蓋率 ≥ 80%（所有單元測試 + 整合測試合計）
-- [ ] 6.4 git commit: `test: add e2e tests for presentation mode`
+- [x] 6.1 執行 `hugo --source site` 確認靜態網站建置無錯誤
+- [x] 6.2 撰寫端到端測試：以 Playwright 開啟本地建置後的章節頁面，驗證按鈕存在、點擊後 overlay 出現、導覽按鈕可正常切換投影片
+- [x] 6.3 確認測試覆蓋率 ≥ 80%（所有單元測試 + 整合測試合計）
+- [x] 6.4 git commit: `test: add e2e tests for presentation mode`
 
 ## 7. 文件更新
 
