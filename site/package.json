@@ -1,0 +1,30 @@
+{
+  "name": "course-site-tests",
+  "version": "1.0.0",
+  "description": "Tests for course site front-end features",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:unit": "jest tests/presentation-mode --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 80,
+        "functions": 80,
+        "branches": 80
+      }
+    },
+    "collectCoverageFrom": [
+      "tests/**/*.js",
+      "!tests/**/*.test.js"
+    ]
+  }
+}

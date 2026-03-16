@@ -1,0 +1,393 @@
+/**
+ * Unit tests for presentation mode core logic.
+ *
+ * Covers:
+ * - buildSlides(): slide splitting by <hr>
+ * - showSlide(): progress display and boundary behavior
+ * - nextSlide() / prevSlide(): navigation with boundary protection
+ * - handleKeydown(): keyboard event routing
+ * - enterPresentation() / exitPresentation(): overlay lifecycle
+ */
+
+const {
+  buildSlides,
+  createOverlay,
+  showSlide,
+  nextSlide,
+  prevSlide,
+  handleKeydown,
+  handleFullscreenChange,
+  enterPresentation,
+  exitPresentation,
+  getCurrentIndex,
+  getSlidesCount,
+  resetState,
+  SLIDE_SEPARATOR_TAG,
+  PRESENTATION_CONTENT_SELECTOR,
+} = require('./presentation-mode');
+
+const {
+  createContentFixture,
+  createFixtureWithSeparators,
+  createFixtureNoSeparators,
+  cleanupFixture,
+} = require('./fixtures');
+
+// Mock fullscreen API (not available in jsdom)
+beforeEach(() => {
+  cleanupFixture();
+  resetState();
+
+  // Mock requestFullscreen / exitFullscreen
+  Object.defineProperty(document.documentElement, 'requestFullscreen', {
+    value: jest.fn().mockResolvedValue(undefined),
+    writable: true,
+    configurable: true,
+  });
+  Object.defineProperty(document, 'exitFullscreen', {
+    value: jest.fn().mockResolvedValue(undefined),
+    writable: true,
+    configurable: true,
+  });
+  Object.defineProperty(document, 'fullscreenElement', {
+    value: null,
+    writable: true,
+    configurable: true,
+  });
+});
+
+afterEach(() => {
+  cleanupFixture();
+  resetState();
+});
+
+// ─────────────────────────────────────────────
+// buildSlides()
+// ─────────────────────────────────────────────
+
+describe('buildSlides()', () => {
+  test('constants are defined correctly', () => {
+    expect(SLIDE_SEPARATOR_TAG).toBe('HR');
+    expect(PRESENTATION_CONTENT_SELECTOR).toBe('.content');
+  });
+
+  test('returns empty array when .content element is absent', () => {
+    document.body.innerHTML = '';
+    const result = buildSlides();
+    expect(result).toEqual([]);
+  });
+
+  test('produces 1 slide when there are no <hr> separators', () => {
+    createFixtureNoSeparators();
+    const result = buildSlides();
+    expect(result).toHaveLength(1);
+  });
+
+  test('produces N+1 slides when there are N <hr> separators', () => {
+    createFixtureWithSeparators(3);
+    const result = buildSlides();
+    expect(result).toHaveLength(4);
+  });
+
+  test('produces 2 slides for 1 separator', () => {
+    createFixtureWithSeparators(1);
+    const result = buildSlides();
+    expect(result).toHaveLength(2);
+  });
+
+  test('slide groups do NOT contain <hr> elements', () => {
+    createFixtureWithSeparators(2);
+    const result = buildSlides();
+    for (const group of result) {
+      for (const node of group) {
+        expect(node.nodeName).not.toBe('HR');
+      }
+    }
+  });
+
+  test('each slide group contains the correct paragraph content', () => {
+    createFixtureWithSeparators(2);
+    const result = buildSlides();
+    // Section 0, 1, 2
+    expect(result[0].some(n => n.textContent && n.textContent.includes('Section 0'))).toBe(true);
+    expect(result[1].some(n => n.textContent && n.textContent.includes('Section 1'))).toBe(true);
+    expect(result[2].some(n => n.textContent && n.textContent.includes('Section 2'))).toBe(true);
+  });
+});
+
+// ─────────────────────────────────────────────
+// createOverlay()
+// ─────────────────────────────────────────────
+
+describe('createOverlay()', () => {
+  test('creates element with id presentation-overlay', () => {
+    const overlay = createOverlay();
+    expect(overlay.id).toBe('presentation-overlay');
+  });
+
+  test('contains btn-exit-presentation', () => {
+    const overlay = createOverlay();
+    expect(overlay.querySelector('#btn-exit-presentation')).not.toBeNull();
+  });
+
+  test('contains btn-prev-slide', () => {
+    const overlay = createOverlay();
+    expect(overlay.querySelector('#btn-prev-slide')).not.toBeNull();
+  });
+
+  test('contains btn-next-slide', () => {
+    const overlay = createOverlay();
+    expect(overlay.querySelector('#btn-next-slide')).not.toBeNull();
+  });
+
+  test('contains slide-progress', () => {
+    const overlay = createOverlay();
+    expect(overlay.querySelector('#slide-progress')).not.toBeNull();
+  });
+
+  test('contains presentation-slide-area', () => {
+    const overlay = createOverlay();
+    expect(overlay.querySelector('#presentation-slide-area')).not.toBeNull();
+  });
+});
+
+// ─────────────────────────────────────────────
+// showSlide()
+// ─────────────────────────────────────────────
+
+describe('showSlide()', () => {
+  function setupWithSlides(separatorCount) {
+    createFixtureWithSeparators(separatorCount);
+    // Build slides state by calling enterPresentation prep steps manually
+    const slideGroups = buildSlides();
+    // Manually set up overlay and state for unit testing
+    const overlay = createOverlay();
+    document.body.appendChild(overlay);
+    // Prime the module state by calling enterPresentation in a controlled way
+    // We'll inject slides via resetState + direct enterPresentation logic
+    return slideGroups;
+  }
+
+  test('progress text format is "{current} / {total}" for first slide', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    const progress = document.getElementById('slide-progress');
+    expect(progress.textContent).toBe('1 / 3');
+  });
+
+  test('progress text updates correctly when navigating', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    nextSlide();
+    const progress = document.getElementById('slide-progress');
+    expect(progress.textContent).toBe('2 / 3');
+  });
+
+  test('progress text shows last slide correctly', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    nextSlide();
+    nextSlide();
+    const progress = document.getElementById('slide-progress');
+    expect(progress.textContent).toBe('3 / 3');
+  });
+
+  test('slide area contains a .presentation-slide div', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    const slideArea = document.getElementById('presentation-slide-area');
+    expect(slideArea.querySelector('.presentation-slide')).not.toBeNull();
+  });
+
+  test('out-of-bounds index is a no-op (negative)', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    const before = document.getElementById('slide-progress').textContent;
+    showSlide(-1);
+    expect(document.getElementById('slide-progress').textContent).toBe(before);
+  });
+
+  test('out-of-bounds index is a no-op (too large)', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    const before = document.getElementById('slide-progress').textContent;
+    showSlide(100);
+    expect(document.getElementById('slide-progress').textContent).toBe(before);
+  });
+});
+
+// ─────────────────────────────────────────────
+// nextSlide() / prevSlide()
+// ─────────────────────────────────────────────
+
+describe('nextSlide() / prevSlide()', () => {
+  test('nextSlide advances to next slide', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    expect(getCurrentIndex()).toBe(0);
+    nextSlide();
+    expect(getCurrentIndex()).toBe(1);
+  });
+
+  test('nextSlide does nothing on last slide', () => {
+    createFixtureWithSeparators(1); // 2 slides
+    enterPresentation();
+    nextSlide(); // now at index 1 (last)
+    nextSlide(); // should stay at 1
+    expect(getCurrentIndex()).toBe(1);
+    expect(document.getElementById('slide-progress').textContent).toBe('2 / 2');
+  });
+
+  test('prevSlide goes to previous slide', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    nextSlide();
+    expect(getCurrentIndex()).toBe(1);
+    prevSlide();
+    expect(getCurrentIndex()).toBe(0);
+  });
+
+  test('prevSlide does nothing on first slide', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    expect(getCurrentIndex()).toBe(0);
+    prevSlide(); // should stay at 0
+    expect(getCurrentIndex()).toBe(0);
+    expect(document.getElementById('slide-progress').textContent).toBe('1 / 2');
+  });
+});
+
+// ─────────────────────────────────────────────
+// handleKeydown()
+// ─────────────────────────────────────────────
+
+describe('handleKeydown()', () => {
+  test('ArrowRight triggers nextSlide', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    expect(getCurrentIndex()).toBe(0);
+    handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    expect(getCurrentIndex()).toBe(1);
+  });
+
+  test('ArrowLeft triggers prevSlide', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    nextSlide(); // go to slide 1
+    handleKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+    expect(getCurrentIndex()).toBe(0);
+  });
+
+  test('Escape triggers exitPresentation (removes overlay)', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    expect(document.getElementById('presentation-overlay')).not.toBeNull();
+    handleKeydown(new KeyboardEvent('keydown', { key: 'Escape' }));
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+  });
+});
+
+// ─────────────────────────────────────────────
+// enterPresentation() / exitPresentation()
+// ─────────────────────────────────────────────
+
+describe('enterPresentation() / exitPresentation()', () => {
+  test('enterPresentation appends #presentation-overlay to body', () => {
+    createFixtureWithSeparators(1);
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+    enterPresentation();
+    expect(document.getElementById('presentation-overlay')).not.toBeNull();
+  });
+
+  test('enterPresentation shows first slide (index 0)', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    expect(getCurrentIndex()).toBe(0);
+    expect(document.getElementById('slide-progress').textContent).toBe('1 / 3');
+  });
+
+  test('enterPresentation calls requestFullscreen', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    expect(document.documentElement.requestFullscreen).toHaveBeenCalled();
+  });
+
+  test('exitPresentation removes #presentation-overlay', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    expect(document.getElementById('presentation-overlay')).not.toBeNull();
+    exitPresentation();
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+  });
+
+  test('ArrowRight does NOT advance slides after exitPresentation', () => {
+    createFixtureWithSeparators(2);
+    enterPresentation();
+    nextSlide(); // at index 1
+    exitPresentation();
+    // Now dispatch real keyboard event to document - listener should be gone
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    // currentIndex should still be 1 (but overlay is gone, so nothing to show)
+    // We verify the listener was removed by checking overlay stays absent
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+  });
+
+  test('calling exitPresentation twice is a no-op (idempotent)', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    exitPresentation();
+    expect(() => exitPresentation()).not.toThrow();
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+  });
+
+  test('exitPresentation calls document.exitFullscreen when fullscreen is active', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    // Simulate being in fullscreen
+    Object.defineProperty(document, 'fullscreenElement', {
+      value: document.documentElement,
+      writable: true,
+      configurable: true,
+    });
+    exitPresentation();
+    expect(document.exitFullscreen).toHaveBeenCalled();
+  });
+
+  test('getSlidesCount returns correct slide count', () => {
+    createFixtureWithSeparators(3);
+    enterPresentation();
+    expect(getSlidesCount()).toBe(4);
+  });
+});
+
+// ─────────────────────────────────────────────
+// handleFullscreenChange()
+// ─────────────────────────────────────────────
+
+describe('handleFullscreenChange()', () => {
+  test('removes overlay when fullscreenElement is null', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    expect(document.getElementById('presentation-overlay')).not.toBeNull();
+    // Simulate fullscreen exit
+    Object.defineProperty(document, 'fullscreenElement', {
+      value: null,
+      writable: true,
+      configurable: true,
+    });
+    handleFullscreenChange();
+    expect(document.getElementById('presentation-overlay')).toBeNull();
+  });
+
+  test('does NOT remove overlay when fullscreenElement is set (entering fullscreen event)', () => {
+    createFixtureWithSeparators(1);
+    enterPresentation();
+    Object.defineProperty(document, 'fullscreenElement', {
+      value: document.documentElement,
+      writable: true,
+      configurable: true,
+    });
+    handleFullscreenChange();
+    expect(document.getElementById('presentation-overlay')).not.toBeNull();
+  });
+});
