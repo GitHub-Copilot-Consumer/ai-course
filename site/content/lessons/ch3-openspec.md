@@ -1,11 +1,11 @@
 ---
-title: "3. (實戰) OpenSpec 與 OPSX 工作流"
+title: "3. Technical Spec 與 OpenSpec 工作流"
 weight: 4
-description: 本課程核心。學習如何透過標準化指令引導 AI 完成從規劃到歸檔的全流程。
+description: 從 Proposal 到可執行的 Technical Spec，掌握 Brownfield 開發的規格工具鏈。
 showToc: true
 ---
 
-> 本課程核心。學習如何透過標準化指令引導 AI 完成從規劃到歸檔的全流程。
+> 從 Proposal 到可執行的 Technical Spec，掌握 Brownfield 開發的規格工具鏈。
 
 ## 學習目標
 
