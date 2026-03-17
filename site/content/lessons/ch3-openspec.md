@@ -252,38 +252,9 @@ Ready for implementation. Run /opsx:apply to start.
 /opsx-apply <change-name>
 ```
 
-**前置條件：** `tasks.md` 已存在且有未完成的 tasks（`- [ ]` 項目）。
+**概覽：** Technical Spec 完成後，用此指令讓 Coding Agent 依序完成 `tasks.md` 中的每個實作任務。AI 會以 `proposal.md`、`specs/`、`design.md` 作為 context，自主完成程式碼修改。
 
-**適用時機：** 所有規格文件準備完成，準備讓 AI 開始實作。
-
-**執行描述：**
-AI 讀取 `proposal.md`、`specs/`、`design.md`、`tasks.md` 作為 context，依序完成每個 task，並在完成後將 `- [ ]` 改為 `- [x]`。
-
-**終端機輸出範例：**
-```
-/opsx:apply
-
-## Implementing: add-user-crud (schema: spec-driven)
-Progress: 0/8 tasks complete
-
-Working on task 1/8: 建立 User entity 與資料庫 schema
-
-> Writing: src/entities/User.ts
-> Writing: migrations/002_create_users.sql
-✓ Task 1 complete
-
-Working on task 2/8: 實作 UserRepository
-
-> Writing: src/repositories/UserRepository.ts
-> Writing: tests/repositories/UserRepository.test.ts
-✓ Task 2 complete
-
-[繼續直到所有 tasks 完成或遇到阻礙]
-```
-
-**常見錯誤：**
-- `State: blocked - missing artifacts` → 先執行 `/opsx:ff` 完成所有規格文件
-- AI 中途卡住 → 查看它在哪個 task 停下，提供更多 context 或拆分 task
+> **詳細操作請見 [Ch4：Coding Agent 與規格驅動實作](../ch4-coding-agent)**，包含完整的 Plan Mode 使用方式、Brownfield 注意事項，以及常見阻礙的處理方式。
 
 ---
 
@@ -296,33 +267,9 @@ Working on task 2/8: 實作 UserRepository
 openspec verify --change "<name>"
 ```
 
-**前置條件：** 實作已完成（所有 tasks 為 `[x]`），`specs/` 目錄有規格文件。
+**概覽：** 實作完成後，用此指令對照 `specs/` 中的每個 Requirement 和 Scenario，檢查實作是否符合規格。發現 Drift（偏離）時報告具體位置與原因。
 
-**適用時機：** 實作完成後，歸檔前的最後驗證。
-
-**執行描述：**
-AI 對照 `specs/` 中的每個 Requirement 和 Scenario，在 codebase 中尋找對應的實作。發現偏離（Drift）時報告具體位置。
-
-**終端機輸出範例：**
-```
-openspec verify --change "add-user-crud"
-
-Checking 5 requirements...
-  ✔ User can be created with email and name
-  ✔ User email must be unique
-  ✔ User can be retrieved by ID
-  ✗ DRIFT: User can be soft-deleted (is_deleted flag)
-    Expected: DELETE endpoint sets is_deleted=true, not hard delete
-    Found: UserRepository.delete() uses hard delete (DELETE FROM users)
-  ✔ User can update name and email
-
-Result: 4/5 requirements satisfied
-Action required: Fix soft-delete implementation before archiving
-```
-
-**常見錯誤：**
-- Drift 太多 → 回到 `tasks.md` 補充遺漏的 tasks，再次執行 `/opsx:apply`
-- `No specs found` → 確認 `specs/` 目錄下有 `spec.md` 檔案
+> **詳細操作請見 [Ch5：驗證、測試與可觀測性](../ch5-verify-observe)**，包含 Drift 修復流程、AI 輔助測試，以及 `openspec archive` 的完整歸檔操作。
 
 ---
 
@@ -335,27 +282,9 @@ Action required: Fix soft-delete implementation before archiving
 openspec archive --change "<name>"
 ```
 
-**前置條件：** `openspec verify` 通過（或你有意識地決定帶著已知偏離歸檔）。
+**概覽：** `openspec verify` 通過後，用此指令將 delta spec 合併回 `openspec/specs/`，建立永久的規格記錄。
 
-**適用時機：** 功能開發完成、PR 合併後。
-
-**執行描述：**
-將 `openspec/changes/<name>/specs/` 下的 delta spec 合併回 `openspec/specs/`，建立永久的規格記錄。同時在原始 `openspec/changes/<name>/` 標記為 archived。
-
-**終端機輸出範例：**
-```
-openspec archive --change "add-user-crud"
-
-Archiving change 'add-user-crud'...
-  ✔ Merged specs/user-crud/spec.md → openspec/specs/user-crud/spec.md
-  ✔ Marked change as archived
-
-Archive complete!
-History preserved at: openspec/changes/archive/add-user-crud/
-```
-
-**常見錯誤：**
-- `Unresolved drift detected` → 先修復 drift 或使用 `--force` 強制歸檔（不建議）
+> **詳細操作請見 [Ch5：驗證、測試與可觀測性](../ch5-verify-observe)**，包含歸檔前的驗證流程以及歸檔後的狀態確認。
 
 ---
 
