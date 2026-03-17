@@ -13,17 +13,22 @@ showToc: true
 
 這章要把它轉化為可執行的 **Technical Spec**——這是 Brownfield 開發的核心工具鏈：
 
-```
-proposal.md（Why + What）
-    ↓
-design.md（架構決策、取捨）
-specs/<capability>/spec.md（具體需求 + 驗收場景）
-    ↓
-tasks.md（可執行的實作清單）
-    ↓
-[Ch4] Coding Agent 依 tasks.md 實作
-    ↓
-[Ch5] openspec verify + archive
+```plantuml
+@startuml
+skinparam backgroundColor #FAFAFA
+skinparam activity {
+  BackgroundColor #EBF5FB
+  BorderColor #2E86C1
+  ArrowColor #2E86C1
+}
+
+:proposal.md\n(Why + What);
+:design.md\n(架構決策、取捨);
+:specs/<capability>/spec.md\n(具體需求 + 驗收場景);
+:tasks.md\n(可執行的實作清單);
+:[Ch4] Coding Agent 依 tasks.md 實作;
+:[Ch5] openspec verify + archive;
+@enduml
 ```
 
 有了完整的 Technical Spec，Coding Agent 不再需要猜測「我應該怎麼實作這個功能」——它有清晰的需求、設計決策、驗收標準，可以自主完成多步驟的實作任務。
@@ -100,24 +105,31 @@ your-project/
 
 ### Artifacts 依賴關係
 
-```
-proposal.md  ──────────────────────────────────┐
-     │                                          │
-     ▼                                          ▼
-design.md              specs/<capability>/spec.md
-     │                          │
-     └──────────┬───────────────┘
-                ▼
-           tasks.md
-                │
-                ▼
-    (openspec apply → implementation)
-                │
-                ▼
-    (openspec verify → validation)
-                │
-                ▼
-    (openspec archive → merged into specs/)
+```plantuml
+@startuml
+skinparam backgroundColor #FAFAFA
+skinparam rectangle {
+  BackgroundColor #EBF5FB
+  BorderColor #2E86C1
+}
+skinparam arrow {
+  Color #2E86C1
+}
+
+rectangle "proposal.md\n(Why + What)" as proposal
+rectangle "design.md\n(架構決策、取捨)" as design
+rectangle "specs/<capability>/spec.md\n(具體需求 + 驗收場景)" as specs
+rectangle "tasks.md\n(可執行的實作清單)" as tasks
+rectangle "[Ch4] Coding Agent 依 tasks.md 實作" as apply
+rectangle "[Ch5] openspec verify + archive" as verify
+
+proposal --> design
+proposal --> specs
+design --> tasks
+specs --> tasks
+tasks --> apply
+apply --> verify
+@enduml
 ```
 
 **讀取順序：** proposal 先（Why）→ design（How）→ specs（What）→ tasks（Steps）
