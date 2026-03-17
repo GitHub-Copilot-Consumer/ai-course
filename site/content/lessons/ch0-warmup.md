@@ -95,6 +95,8 @@ openspec verify --change "add-jwt-auth"
 **具體情境：**
 Sprint Review 前一天，工程師用 Copilot Chat 快速生成了一個訂單計算模組。隔天 Code Review 時，沒有人能解釋這段程式碼為什麼這樣寫——連寫的人自己也不確定，因為他只是「讓 AI 生成，測試過了就合進去」。三個月後需求改動，沒有人敢動這段程式碼。
 
+<!-- split -->
+
 **根本原因：**
 AI 生成的程式碼缺乏背後的設計意圖（Design Intent）。沒有記錄「為何這樣設計」，只有程式碼本身。
 
