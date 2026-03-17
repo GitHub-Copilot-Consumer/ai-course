@@ -334,75 +334,66 @@ openspec/changes/
 
 ## 3.4 Lab 練習
 
-### Lab A：建立 CRUD User Service（基礎）
+### Lab：從 Proposal 生成 Technical Spec
+
+**目標：** 為 Ch2 中的 `proposal.md`，用 `/opsx:ff`（Fast-Forward）生成完整的 Technical Spec（`design.md` + `specs/` + `tasks.md`）。
 
 **前置條件：**
-- OpenSpec CLI 已安裝（`openspec --version` 確認）
-- OpenCode 已啟動並開啟專案目錄
-- 專案已執行 `openspec init`
+- 完成 Ch2 Lab（`openspec/changes/formalize-todo-api/proposal.md` 存在）
+- OpenCode 已啟動並開啟 Todo MVP 專案目錄
 
-**完整流程：**
+**Step 1：在 OpenCode 中開啟 Change**
 
-**Step 1：建立 Change**
+確認你的 change 目前狀態：
 ```bash
-openspec new change "add-user-service"
+openspec status --change "formalize-todo-api"
 ```
-預期輸出：
+預期輸出（`proposal` 已完成，其他 artifacts 尚未建立）：
 ```
-✔ Created change 'add-user-service' at openspec/changes/add-user-service/
+Change: formalize-todo-api
+  ✔ proposal.md
+  ✗ design.md
+  ✗ specs/
+  ✗ tasks.md
 ```
 
-**Step 2：生成所有規格文件（Fast-Forward）**
+**Step 2：用 Fast-Forward 生成剩餘 Artifacts**
 
 在 OpenCode Chat 中輸入：
 ```
-/opsx-propose add-user-service
-
-我要建立一個 User 的 CRUD service，包含：
-- 建立 User（name, email, created_at）
-- 用 ID 查詢 User
-- 更新 User 的 name 和 email
-- 軟刪除 User（設 is_deleted=true，不實際刪除資料）
-```
-預期結果：
-- `openspec/changes/add-user-service/proposal.md` 已建立
-- `openspec/changes/add-user-service/specs/user-service/spec.md` 已建立
-- `openspec/changes/add-user-service/design.md` 已建立
-- `openspec/changes/add-user-service/tasks.md` 已建立（含 6–10 個 tasks）
-
-**Step 3：執行實作**
-```
-/opsx-apply add-user-service
-```
-AI 會依序完成所有 tasks，每完成一個會標記 `[x]`。
-
-預期結果：`tasks.md` 中所有項目變為 `[x]`
-
-**Step 4：驗證實作**
-```bash
-openspec verify --change "add-user-service"
-```
-預期輸出：所有 requirement 通過（或看到具體 drift 描述以便修復）
-
-**Step 5：歸檔**
-```bash
-openspec archive --change "add-user-service"
-```
-預期輸出：
-```
-✔ Merged specs/user-service/spec.md → openspec/specs/user-service/spec.md
-Archive complete!
+/opsx-propose formalize-todo-api
 ```
 
-**Done criteria：** `openspec/specs/user-service/spec.md` 存在，且 `openspec verify` 全部通過。
+AI 會依序生成：
+1. `design.md`：架構決策（使用什麼 DB、錯誤處理策略、API 格式）
+2. `specs/todo-api/spec.md`：具體需求與驗收場景（Given/When/Then 格式）
+3. `tasks.md`：可執行的實作清單
+
+**Step 3：審閱生成的 Spec**
+
+重點檢查 `specs/todo-api/spec.md` 中的每個 Scenario：
+- Scenario 是否覆蓋了你在 Ch2 Lab 列出的邊界情況（空 title、不存在的 id）？
+- 如果有遺漏，直接編輯 `spec.md` 補充，然後執行 `/opsx-continue` 重新生成 `tasks.md`
+
+**Step 4：確認 Tasks 合理**
+
+打開 `tasks.md`，確認每個 task 的粒度合適：
+- 太大的 task（「實作整個 API」）→ 手動拆分成更小的步驟
+- 每個 task 應在 30 分鐘內完成
+
+**Done criteria：**
+- `openspec/changes/formalize-todo-api/design.md` 存在
+- `openspec/changes/formalize-todo-api/specs/` 下至少一個 `spec.md` 存在，包含 Requirement + Scenario 格式
+- `openspec/changes/formalize-todo-api/tasks.md` 存在，且 tasks 粒度合理
+
+> Technical Spec 準備好了！下一章，我們要讓 Coding Agent 依照 `tasks.md` 在你的 MVP 上實作。
 
 ---
 
-### Lab B：開發折扣邏輯服務（進階）
+### 進階：探索並釐清模糊需求（Explore）
 
-**場景：** 業務提出一個折扣規則：VIP 用戶買滿 3 件打 8 折，一般用戶買滿 5 件打 9 折，但特定商品類別（生鮮）不打折。規則模糊，先 Explore 再實作。
+如果你在生成 Spec 前對某些需求還不確定，可以先用 `/opsx:explore` 調查：
 
-**Step 1：用 Explore 釐清規則**
 ```
 /opsx:explore 請幫我分析以下折扣規則的邊界情況：
 VIP 用戶買滿 3 件打 8 折，一般用戶買滿 5 件打 9 折，
@@ -410,19 +401,6 @@ VIP 用戶買滿 3 件打 8 折，一般用戶買滿 5 件打 9 折，
 問題：
 1. 折扣疊加嗎？（例如 VIP 買生鮮商品）
 2. 「件數」是指全購物車還是同類商品？
-3. 打折後是四捨五入還是無條件捨去？
 ```
 
-**Step 2：根據 Explore 報告確認規格**
-將 Explore 的調查結果整理為需求，建立 change：
-```bash
-openspec new change "add-discount-service"
-```
-
-**Step 3：撰寫精確的 Proposal**
-在 proposal.md 中明確記錄邊界情況的決策（例如：折扣不疊加，以最優折扣為準）。
-
-**Step 4：Apply → Verify → Archive**
-重複 Lab A 的 Step 3–5。
-
-**Done criteria：** 折扣邏輯有對應的 unit tests 覆蓋所有邊界情況（VIP + 生鮮、一般用戶 + 滿件等）。
+Explore 的報告可以作為撰寫 `proposal.md` 的輸入，確保規格從一開始就釐清了邊界情況。
