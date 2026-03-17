@@ -1,6 +1,6 @@
 baseURL: "https://example.com/"
 languageCode: "zh-TW"
-title: "從 AI 輔助到規格驅動"
+title: "從 AI 輔助到規格驅動 (SDD) 實戰攻略"
 
 params:
   description: "Course materials, assignments, and resources."
@@ -8,13 +8,10 @@ params:
 
 menu:
   main:
-    - name: "Lessons"
+    - name: "課程章節"
       url: "/lessons/"
       weight: 10
-    - name: "Assignments"
-      url: "/assignments/"
-      weight: 20
-    - name: "Resources"
+    - name: "相關資源"
       url: "/resources/"
       weight: 30
 
