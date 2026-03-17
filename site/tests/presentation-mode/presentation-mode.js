@@ -15,6 +15,7 @@ const SLIDE_SPLIT_COMMENT = 'split';
 // --- State ---
 let slides = [];
 let currentIndex = 0;
+let _savedBodyOverflow = '';
 
 // --- Slide Building ---
 
@@ -250,6 +251,10 @@ function enterPresentation() {
   slides = buildSlides();
   currentIndex = 0;
 
+  // Lock body scroll
+  _savedBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+
   const overlay = createOverlay();
   document.body.appendChild(overlay);
 
@@ -282,6 +287,9 @@ function exitPresentation() {
   const overlay = document.getElementById('presentation-overlay');
   if (overlay) overlay.remove();
 
+  // Restore body scroll
+  document.body.style.overflow = _savedBodyOverflow;
+
   if (document.fullscreenElement && document.exitFullscreen) {
     document.exitFullscreen().catch(() => {});
   }
@@ -306,7 +314,8 @@ if (typeof module !== 'undefined' && module.exports) {
     // expose state accessors for tests
     getCurrentIndex: () => currentIndex,
     getSlidesCount: () => slides.length,
-    resetState: () => { slides = []; currentIndex = 0; },
+    getSavedBodyOverflow: () => _savedBodyOverflow,
+    resetState: () => { slides = []; currentIndex = 0; _savedBodyOverflow = ''; },
     SLIDE_SEPARATOR_TAG,
     PRESENTATION_CONTENT_SELECTOR,
     NO_SLIDE_CLASS,
