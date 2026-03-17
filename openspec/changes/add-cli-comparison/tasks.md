@@ -28,4 +28,4 @@
 - [x] 3.2 更新 `openspec/specs/intro-ai-chapter/spec.md`：將 MODIFIED Requirement 的內容 merge 進主 spec（CLI 比較節位置需求）
 - [x] 3.3 更新 `openspec/specs/cli-comparison/spec.md`：建立此 capability 的主 spec 檔案
 - [x] 3.4 更新 `README.md` 以反映導言章節的內容變更
-- [ ] 3.5 git commit: `docs: update specs and README for cli-comparison capability`
+- [x] 3.5 git commit: `docs: update specs and README for cli-comparison capability`
