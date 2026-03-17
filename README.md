@@ -25,7 +25,8 @@ site/
 │   │   └── ch5-team.md        # 第 5 章
 │   ├── assignments/           # 作業
 │   └── resources/
-│       └── commands.md        # 常用 OPSX 指令速查
+│       ├── commands.md        # 常用 OPSX 指令速查
+│       └── everything-claude-code.md  # everything-claude-code 資源介紹與 OpenCode 整合指南
 ├── themes/                    # (不使用 submodule，主題由 Hugo Module 管理)
 └── config.yaml                # Hugo 設定檔
 ```
