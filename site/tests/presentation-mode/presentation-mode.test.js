@@ -24,12 +24,17 @@ const {
   resetState,
   SLIDE_SEPARATOR_TAG,
   PRESENTATION_CONTENT_SELECTOR,
+  NO_SLIDE_CLASS,
+  SLIDE_SPLIT_COMMENT,
 } = require('./presentation-mode');
 
 const {
   createContentFixture,
   createFixtureWithSeparators,
   createFixtureNoSeparators,
+  createFixtureWithNoSlide,
+  createFixtureWithSplitComment,
+  createFixtureWithEdgeSplitComment,
   cleanupFixture,
 } = require('./fixtures');
 
@@ -389,5 +394,109 @@ describe('handleFullscreenChange()', () => {
     });
     handleFullscreenChange();
     expect(document.getElementById('presentation-overlay')).not.toBeNull();
+  });
+});
+
+// ─────────────────────────────────────────────
+// NO_SLIDE_CLASS constant & .no-slide filtering
+// ─────────────────────────────────────────────
+
+describe('NO_SLIDE_CLASS constant', () => {
+  test('NO_SLIDE_CLASS is exported and equals "no-slide"', () => {
+    expect(NO_SLIDE_CLASS).toBe('no-slide');
+  });
+});
+
+describe('buildSlides() - .no-slide filtering', () => {
+  test('skips elements with class no-slide when building slide groups', () => {
+    createFixtureWithNoSlide();
+    const result = buildSlides();
+    expect(result).toHaveLength(1);
+    const group = result[0];
+    const hasNoSlide = group.some(
+      node => node.classList && node.classList.contains('no-slide')
+    );
+    expect(hasNoSlide).toBe(false);
+  });
+
+  test('content before and after no-slide div both appear in the same slide group', () => {
+    createFixtureWithNoSlide();
+    const result = buildSlides();
+    const group = result[0];
+    const texts = group.map(n => n.textContent || '').join(' ');
+    expect(texts).toContain('Before content');
+    expect(texts).toContain('After content');
+    expect(texts).not.toContain('Hidden content');
+  });
+
+  test('behaviour is unchanged when no no-slide elements are present', () => {
+    createFixtureWithSeparators(2);
+    const result = buildSlides();
+    expect(result).toHaveLength(3);
+    for (const group of result) {
+      const hasNoSlide = group.some(
+        node => node.classList && node.classList.contains('no-slide')
+      );
+      expect(hasNoSlide).toBe(false);
+    }
+  });
+});
+
+// ─────────────────────────────────────────────
+// SLIDE_SPLIT_COMMENT constant & <!-- split --> splitting
+// ─────────────────────────────────────────────
+
+describe('SLIDE_SPLIT_COMMENT constant', () => {
+  test('SLIDE_SPLIT_COMMENT is exported and equals "split"', () => {
+    expect(SLIDE_SPLIT_COMMENT).toBe('split');
+  });
+});
+
+describe('buildSlides() - <!-- split --> splitting', () => {
+  test('one <!-- split --> inside a section produces 2 slides from that section', () => {
+    // 0 <hr>, section 0 has 1 split → total 2 slides
+    createFixtureWithSplitComment(0, 0, 1);
+    const result = buildSlides();
+    expect(result).toHaveLength(2);
+  });
+
+  test('split comment node does not appear in any slide group', () => {
+    createFixtureWithSplitComment(0, 0, 1);
+    const result = buildSlides();
+    for (const group of result) {
+      const hasComment = group.some(
+        node => node.nodeType === 8 && node.nodeValue.trim() === 'split'
+      );
+      expect(hasComment).toBe(false);
+    }
+  });
+
+  test('two <!-- split --> inside a section produce 3 slides from that section', () => {
+    // 0 <hr>, section 0 has 2 splits → total 3 slides
+    createFixtureWithSplitComment(0, 0, 2);
+    const result = buildSlides();
+    expect(result).toHaveLength(3);
+  });
+
+  test('sections without split comments are unaffected', () => {
+    // 2 <hr> → 3 sections; section 1 gets 1 split → total 4 slides
+    createFixtureWithSplitComment(2, 1, 1);
+    const result = buildSlides();
+    expect(result).toHaveLength(4);
+  });
+
+  test('<!-- split --> at start of group does not produce an empty slide', () => {
+    createFixtureWithEdgeSplitComment('start');
+    const result = buildSlides();
+    // Should have 1 non-empty slide (the empty group is filtered out)
+    expect(result).toHaveLength(1);
+    expect(result[0].length).toBeGreaterThan(0);
+  });
+
+  test('<!-- split --> at end of group does not produce an empty slide', () => {
+    createFixtureWithEdgeSplitComment('end');
+    const result = buildSlides();
+    expect(result).toHaveLength(1);
+    expect(result[0].length).toBeGreaterThan(0);
   });
 });
