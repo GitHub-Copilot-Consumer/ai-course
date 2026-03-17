@@ -9,17 +9,17 @@
 - [x] 1.7 撰寫測試：驗證「本課程」說明段落存在
 - [x] 1.8 撰寫測試：驗證 CLI 比較節位置正確（在 Coding Agent 節之後、小結之前）
 - [x] 1.9 確認所有測試初始狀態為失敗（Red）
-- [ ] 1.10 git commit: `test: add cli-comparison section spec tests for ch-intro-ai`
+- [x] 1.10 git commit: `test: add cli-comparison section spec tests for ch-intro-ai`
 
 ## 2. 實作內容
 
-- [ ] 2.1 在 `site/content/lessons/ch-intro-ai.md` 的「小結」節前插入新的 H2 節：`## 4. 主流 Coding Agent CLI 比較`
-- [ ] 2.2 加入版本 disclaimer：「> 此比較基於 2026 年初的版本，AI 工具迭代迅速，各工具功能持續演進。」
-- [ ] 2.3 加入七維度比較表（工具 × 開源 / 預設模型 / 多模型支援 / Fallback 能力 / Subagent 支援 / Native Tools 集合 / 廠商鎖定風險）
-- [ ] 2.4 加入模型支援光譜 ASCII 圖（橫向排列，從單一廠商鎖定到完全模型無關）
-- [ ] 2.5 加入「觀察重點」段落，說明多模型支援的本質差異
-- [ ] 2.6 加入「Subagent 架構差異」觀察段落
-- [ ] 2.7 加入「本課程的選擇」段落，說明使用 OpenCode + GitHub Copilot LLM 的理由（多模型彈性、不鎖定廠商、隱私）
+- [x] 2.1 在 `site/content/lessons/ch-intro-ai.md` 的「小結」節前插入新的 H2 節：`## 4. 主流 Coding Agent CLI 比較`
+- [x] 2.2 加入版本 disclaimer：「> 此比較基於 2026 年初的版本，AI 工具迭代迅速，各工具功能持續演進。」
+- [x] 2.3 加入七維度比較表（工具 × 開源 / 預設模型 / 多模型支援 / Fallback 能力 / Subagent 支援 / Native Tools 集合 / 廠商鎖定風險）
+- [x] 2.4 加入模型支援光譜 ASCII 圖（橫向排列，從單一廠商鎖定到完全模型無關）
+- [x] 2.5 加入「觀察重點」段落，說明多模型支援的本質差異
+- [x] 2.6 加入「Subagent 架構差異」觀察段落
+- [x] 2.7 加入「本課程的選擇」段落，說明使用 OpenCode + GitHub Copilot LLM 的理由（多模型彈性、不鎖定廠商、隱私）
 - [ ] 2.8 git commit: `docs: add cli-comparison section to ch-intro-ai`
 
 ## 3. 驗證與收尾

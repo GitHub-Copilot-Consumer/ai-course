@@ -153,9 +153,11 @@ describe('cli-comparison: 本課程工具選擇說明存在', () => {
   });
 
   test('本課程選擇段落提及 OpenCode', () => {
-    // 確認「本課程」文字附近有 OpenCode 的提及
-    const idx = content.indexOf('本課程');
-    const surrounding = content.slice(Math.max(0, idx - 50), idx + 300);
+    // 找「本課程的選擇」段落（CLI 比較節中的專屬段落）
+    const sectionTitle = '本課程的選擇';
+    const idx = content.indexOf(sectionTitle);
+    expect(idx).toBeGreaterThan(-1);
+    const surrounding = content.slice(idx, idx + 500);
     expect(surrounding).toContain('OpenCode');
   });
 });
