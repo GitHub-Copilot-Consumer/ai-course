@@ -22,6 +22,7 @@ const {
   getCurrentIndex,
   getSlidesCount,
   resetState,
+  getSavedBodyOverflow,
   SLIDE_SEPARATOR_TAG,
   PRESENTATION_CONTENT_SELECTOR,
   NO_SLIDE_CLASS,
@@ -362,6 +363,37 @@ describe('enterPresentation() / exitPresentation()', () => {
     createFixtureWithSeparators(3);
     enterPresentation();
     expect(getSlidesCount()).toBe(4);
+  });
+
+  test('enterPresentation sets body overflow to hidden', () => {
+    createFixtureWithSeparators(1);
+    document.body.style.overflow = '';
+    enterPresentation();
+    expect(document.body.style.overflow).toBe('hidden');
+  });
+
+  test('exitPresentation restores body overflow to pre-enter value', () => {
+    createFixtureWithSeparators(1);
+    document.body.style.overflow = 'auto';
+    enterPresentation();
+    expect(document.body.style.overflow).toBe('hidden');
+    exitPresentation();
+    expect(document.body.style.overflow).toBe('auto');
+  });
+
+  test('exitPresentation restores body overflow when it was empty before entering', () => {
+    createFixtureWithSeparators(1);
+    document.body.style.overflow = '';
+    enterPresentation();
+    exitPresentation();
+    expect(document.body.style.overflow).toBe('');
+  });
+
+  test('getSavedBodyOverflow reflects the overflow value saved on enter', () => {
+    createFixtureWithSeparators(1);
+    document.body.style.overflow = 'scroll';
+    enterPresentation();
+    expect(getSavedBodyOverflow()).toBe('scroll');
   });
 });
 
