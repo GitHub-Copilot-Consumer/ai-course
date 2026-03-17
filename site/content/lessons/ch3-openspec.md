@@ -7,6 +7,29 @@ showToc: true
 
 > 從 Proposal 到可執行的 Technical Spec，掌握 Brownfield 開發的規格工具鏈。
 
+## 從 Proposal 到 Technical Spec
+
+上一章，你為 Ch1 的 Todo MVP 回推寫了一份 `proposal.md`。那份 Proposal 是**非技術性的規格**：它說的是「我們決定做什麼、不做什麼」，但還沒有回答「要怎麼做、具體的 API 行為是什麼、驗收標準是什麼」。
+
+這章要把它轉化為可執行的 **Technical Spec**——這是 Brownfield 開發的核心工具鏈：
+
+```
+proposal.md（Why + What）
+    ↓
+design.md（架構決策、取捨）
+specs/<capability>/spec.md（具體需求 + 驗收場景）
+    ↓
+tasks.md（可執行的實作清單）
+    ↓
+[Ch4] Coding Agent 依 tasks.md 實作
+    ↓
+[Ch5] openspec verify + archive
+```
+
+有了完整的 Technical Spec，Coding Agent 不再需要猜測「我應該怎麼實作這個功能」——它有清晰的需求、設計決策、驗收標準，可以自主完成多步驟的實作任務。
+
+---
+
 ## 學習目標
 
 本章結束後，你將能夠：
@@ -14,7 +37,7 @@ showToc: true
 - **執行** OpenSpec 完整工作流（new → ff/propose → apply → verify → archive）
 - **操作** 每個 OPSX 指令，並理解其輸入、輸出與適用時機
 - **應用** 多工並行，同時維護兩個 change 而不混亂
-- **完成** 一個 CRUD User Service 的完整 SDD 開發循環
+- **完成** 從 Proposal 生成完整 Technical Spec 的完整流程
 
 ---
 
