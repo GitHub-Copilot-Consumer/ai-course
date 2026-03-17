@@ -11,11 +11,11 @@
 
 ## 2. Ch1：Vibe Coding 章節重構
 
-- [ ] 2.1 新增 `site/content/lessons/ch1-vibe-coding.md`，複製 `ch1-copilot.md` 內容作為基礎，更新 front matter（title、description、weight 保持 2），git commit `docs: create ch1-vibe-coding.md with updated title and description`
-- [ ] 2.2 更新 `ch1-vibe-coding.md`：新增「Vibe Coding 方法論」段落（定義、適用場景、操作心法），git commit `docs: add vibe coding methodology section to ch1`
-- [ ] 2.3 更新 `ch1-vibe-coding.md`：新增「Prototype 退出條件」段落（三個退出信號），git commit `docs: add prototype exit criteria section to ch1`
-- [ ] 2.4 更新 `ch1-vibe-coding.md`：Lab B 改為「用 Copilot Vibe Code 一個完整 MVP」，結尾加入引導至 Ch2 的提示語，git commit `docs: update ch1 lab b to vibe coding mvp exercise`
-- [ ] 2.5 刪除 `site/content/lessons/ch1-copilot.md`，git commit `docs: remove deprecated ch1-copilot.md`
+- [x] 2.1 新增 `site/content/lessons/ch1-vibe-coding.md`，複製 `ch1-copilot.md` 內容作為基礎，更新 front matter（title、description、weight 保持 2），git commit `docs: create ch1-vibe-coding.md with updated title and description`
+- [x] 2.2 更新 `ch1-vibe-coding.md`：新增「Vibe Coding 方法論」段落（定義、適用場景、操作心法），git commit `docs: add vibe coding methodology section to ch1`
+- [x] 2.3 更新 `ch1-vibe-coding.md`：新增「Prototype 退出條件」段落（三個退出信號），git commit `docs: add prototype exit criteria section to ch1`
+- [x] 2.4 更新 `ch1-vibe-coding.md`：Lab B 改為「用 Copilot Vibe Code 一個完整 MVP」，結尾加入引導至 Ch2 的提示語，git commit `docs: update ch1 lab b to vibe coding mvp exercise`
+- [x] 2.5 刪除 `site/content/lessons/ch1-copilot.md`，git commit `docs: remove deprecated ch1-copilot.md`
 
 ## 3. Ch2：MVP 到規格章節重構
 
