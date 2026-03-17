@@ -18,6 +18,12 @@ menu:
       url: "/resources/"
       weight: 30
 
+markup:
+  goldmark:
+    renderer:
+      # Required to allow render hooks (e.g., plantuml) to output raw HTML/SVG
+      unsafe: true
+
 module:
   imports:
     - path: github.com/imfing/hextra
