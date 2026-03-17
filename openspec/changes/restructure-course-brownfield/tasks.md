@@ -19,21 +19,21 @@
 
 ## 3. Ch2：MVP 到規格章節重構
 
-- [ ] 3.1 新增 `site/content/lessons/ch2-mvp-to-spec.md`，複製 `ch2-sdd.md` 內容作為基礎，更新 front matter（title、description），git commit `docs: create ch2-mvp-to-spec.md with updated title and description`
-- [ ] 3.2 更新 `ch2-mvp-to-spec.md`：新增轉折點開場（三個引導問題 + 「歡迎來到 Brownfield」），git commit `docs: add brownfield turning point opening to ch2`
-- [ ] 3.3 更新 `ch2-mvp-to-spec.md`：新增「MVP 之後的三條路」段落，git commit `docs: add three paths after mvp section to ch2`
-- [ ] 3.4 更新 `ch2-mvp-to-spec.md`：新增「Proposal = MVP 的結晶」段落，包含範例，git commit `docs: add proposal as mvp crystallization concept to ch2`
-- [ ] 3.5 更新 `ch2-mvp-to-spec.md`：TDD vs SDD 比較加入 Vibe Coding 後的 MVP 情境說明，git commit `docs: add vibe coding context to tdd vs sdd comparison in ch2`
-- [ ] 3.6 更新 `ch2-mvp-to-spec.md`：環境初始化段落改為「在 MVP 專案上初始化 OpenSpec」定位，加入附錄引導，git commit `docs: reframe openspec init as brownfield setup in ch2`
-- [ ] 3.7 更新 `ch2-mvp-to-spec.md`：Lab 改為「為 Ch1 的 MVP 撰寫 proposal.md」，git commit `docs: update ch2 lab to writing proposal from mvp exercise`
-- [ ] 3.8 刪除 `site/content/lessons/ch2-sdd.md`，git commit `docs: remove deprecated ch2-sdd.md`
+- [x] 3.1 新增 `site/content/lessons/ch2-mvp-to-spec.md`，複製 `ch2-sdd.md` 內容作為基礎，更新 front matter（title、description），git commit `docs: create ch2-mvp-to-spec.md with updated title and description`
+- [x] 3.2 更新 `ch2-mvp-to-spec.md`：新增轉折點開場（三個引導問題 + 「歡迎來到 Brownfield」），git commit `docs: add brownfield turning point opening to ch2`
+- [x] 3.3 更新 `ch2-mvp-to-spec.md`：新增「MVP 之後的三條路」段落，git commit `docs: add three paths after mvp section to ch2`
+- [x] 3.4 更新 `ch2-mvp-to-spec.md`：新增「Proposal = MVP 的結晶」段落，包含範例，git commit `docs: add proposal as mvp crystallization concept to ch2`
+- [x] 3.5 更新 `ch2-mvp-to-spec.md`：TDD vs SDD 比較加入 Vibe Coding 後的 MVP 情境說明，git commit `docs: add vibe coding context to tdd vs sdd comparison in ch2`
+- [x] 3.6 更新 `ch2-mvp-to-spec.md`：環境初始化段落改為「在 MVP 專案上初始化 OpenSpec」定位，加入附錄引導，git commit `docs: reframe openspec init as brownfield setup in ch2`
+- [x] 3.7 更新 `ch2-mvp-to-spec.md`：Lab 改為「為 Ch1 的 MVP 撰寫 proposal.md」，git commit `docs: update ch2 lab to writing proposal from mvp exercise`
+- [x] 3.8 刪除 `site/content/lessons/ch2-sdd.md`，git commit `docs: remove deprecated ch2-sdd.md`
 
 ## 4. Ch3：OpenSpec 工作流定位調整
 
-- [ ] 4.1 更新 `ch3-openspec.md`：front matter title 改為「Technical Spec 與 OpenSpec 工作流」，description 更新，git commit `docs: update ch3 title and description to technical spec focus`
-- [ ] 4.2 更新 `ch3-openspec.md`：新增開場銜接段落（從 Proposal 到 Technical Spec + Brownfield 脈絡），git commit `docs: add proposal-to-tech-spec bridging opening to ch3`
-- [ ] 4.3 更新 `ch3-openspec.md`：apply/verify/archive 三個指令改為預覽性質，加入「詳見 Ch4/Ch5」引導，git commit `docs: simplify apply/verify/archive to previews in ch3`
-- [ ] 4.4 更新 `ch3-openspec.md`：Lab 改為「從 Proposal 生成 Technical Spec」，git commit `docs: update ch3 lab to generating tech spec from proposal`
+- [x] 4.1 更新 `ch3-openspec.md`：front matter title 改為「Technical Spec 與 OpenSpec 工作流」，description 更新，git commit `docs: update ch3 title and description to technical spec focus`
+- [x] 4.2 更新 `ch3-openspec.md`：新增開場銜接段落（從 Proposal 到 Technical Spec + Brownfield 脈絡），git commit `docs: add proposal-to-tech-spec bridging opening to ch3`
+- [x] 4.3 更新 `ch3-openspec.md`：apply/verify/archive 三個指令改為預覽性質，加入「詳見 Ch4/Ch5」引導，git commit `docs: simplify apply/verify/archive to previews in ch3`
+- [x] 4.4 更新 `ch3-openspec.md`：Lab 改為「從 Proposal 生成 Technical Spec」，git commit `docs: update ch3 lab to generating tech spec from proposal`
 
 ## 5. Ch4：Coding Agent 章節精簡
 
