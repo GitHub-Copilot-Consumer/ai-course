@@ -20,12 +20,12 @@
 - [x] 2.5 加入「觀察重點」段落，說明多模型支援的本質差異
 - [x] 2.6 加入「Subagent 架構差異」觀察段落
 - [x] 2.7 加入「本課程的選擇」段落，說明使用 OpenCode + GitHub Copilot LLM 的理由（多模型彈性、不鎖定廠商、隱私）
-- [ ] 2.8 git commit: `docs: add cli-comparison section to ch-intro-ai`
+- [x] 2.8 git commit: `docs: add cli-comparison section to ch-intro-ai`
 
 ## 3. 驗證與收尾
 
-- [ ] 3.1 執行所有測試，確認全數通過（Green）
-- [ ] 3.2 更新 `openspec/specs/intro-ai-chapter/spec.md`：將 MODIFIED Requirement 的內容 merge 進主 spec（CLI 比較節位置需求）
-- [ ] 3.3 更新 `openspec/specs/cli-comparison/spec.md`：建立此 capability 的主 spec 檔案
-- [ ] 3.4 更新 `README.md` 以反映導言章節的內容變更
+- [x] 3.1 執行所有測試，確認全數通過（Green）
+- [x] 3.2 更新 `openspec/specs/intro-ai-chapter/spec.md`：將 MODIFIED Requirement 的內容 merge 進主 spec（CLI 比較節位置需求）
+- [x] 3.3 更新 `openspec/specs/cli-comparison/spec.md`：建立此 capability 的主 spec 檔案
+- [x] 3.4 更新 `README.md` 以反映導言章節的內容變更
 - [ ] 3.5 git commit: `docs: update specs and README for cli-comparison capability`

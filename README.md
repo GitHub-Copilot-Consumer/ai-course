@@ -16,7 +16,7 @@ site/
 │   ├── _index.md              # 首頁
 │   ├── lessons/
 │   │   ├── _index.md          # 課程章節列表頁
-│   │   ├── ch-intro-ai.md     # 導言：理解 Model、Agent 與 Coding Agent
+│   │   ├── ch-intro-ai.md     # 導言：理解 Model、Agent 與 Coding Agent（含主流 CLI 比較）
 │   │   ├── ch0-warmup.md      # 第 0 章
 │   │   ├── ch1-copilot.md     # 第 1 章
 │   │   ├── ch2-sdd.md         # 第 2 章
