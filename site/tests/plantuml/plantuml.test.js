@@ -63,7 +63,8 @@ describe('plantuml-rendering: render-codeblock-plantuml.html render hook', () =>
   test('render hook has fallback pre/code block on error', () => {
     const content = fs.readFileSync(RENDER_HOOK_PATH, 'utf-8');
     expect(content).toContain('<pre>');
-    expect(content).toContain('<code>');
+    // <code> may carry a class attribute (e.g. class="language-plantuml")
+    expect(content).toMatch(/<code[\s>]/);
   });
 
   test('render hook uses warnf for error logging', () => {
