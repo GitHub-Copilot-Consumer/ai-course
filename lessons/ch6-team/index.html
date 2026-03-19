@@ -48,23 +48,23 @@ System
 │   │
 │   ├─ 資料是否機密？
 │   │   ├─ 是 → Ollama &#43; Codestral（完全本地）
-│   │   └─ 否 → Claude Sonnet/Opus 或 GPT-4o
+│   │   └─ 否 → Claude Sonnet/Opus 或 GPT-5.4
 │   │
-│   └─ 推薦：Claude 3.5 Sonnet（推理強、Context 200K）
+│   └─ 推薦：Claude Opus 4.6
 │
 ├─ 實作/生成（大量 Boilerplate、重複性程式碼）
 │   │
 │   ├─ 預算是否有限制？
-│   │   ├─ 是 → GPT-4o mini 或 Ollama &#43; Llama3（低成本）
-│   │   └─ 否 → Claude Sonnet 或 GPT-4o
+│   │   ├─ 是 → GPT-5 mini 或 Ollama &#43; GPT-OSS（低成本）
+│   │   └─ 否 → Claude Sonnet 或 GPT-5.4
 │   │
-│   └─ 推薦：GPT-4o mini（速度快、成本低）
+│   └─ 推薦：Claude Sonnet 4.6
 │
 ├─ 即時補全（寫程式時的 inline 建議）
 │   └─ 推薦：GitHub Copilot（低延遲、IDE 深度整合）
 │
 └─ 機密/合規專案（程式碼絕對不能外流）
-    └─ 推薦：Ollama &#43; Llama3 或 Codestral（完全離線）</code></pre></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title="Copy code" aria-label="Copy code" data-copied-label=Copied!><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><h3>判斷條件說明<span class="hx:absolute hx:-mt-20" id=判斷條件說明></span>
+    └─ 推薦：Ollama &#43; GPT-OSS 或 Codestral（完全離線）</code></pre></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title="Copy code" aria-label="Copy code" data-copied-label=Copied!><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><h3>判斷條件說明<span class="hx:absolute hx:-mt-20" id=判斷條件說明></span>
 <a href=#%e5%88%a4%e6%96%b7%e6%a2%9d%e4%bb%b6%e8%aa%aa%e6%98%8e class=subheading-anchor aria-label="Permalink for this section"></a></h3><table><thead><tr><th>判斷維度</th><th>問題</th><th>選擇邏輯</th></tr></thead><tbody><tr><td><strong>任務類型</strong></td><td>需要創意推理嗎？</td><td>推理任務用大模型，生成任務用小模型</td></tr><tr><td><strong>資料敏感度</strong></td><td>程式碼含商業機密嗎？</td><td>機密資料 → 必須用本地模型</td></tr><tr><td><strong>成本預算</strong></td><td>每月 AI 預算是多少？</td><td>高頻低難度任務優先用便宜模型</td></tr><tr><td><strong>回應速度</strong></td><td>需要即時回應嗎？</td><td>即時補全 → Copilot，深度分析可等待</td></tr></tbody></table><hr><h2>人機協作邊界<span class="hx:absolute hx:-mt-20" id=人機協作邊界></span>
 <a href=#%e4%ba%ba%e6%a9%9f%e5%8d%94%e4%bd%9c%e9%82%8a%e7%95%8c class=subheading-anchor aria-label="Permalink for this section"></a></h2><p>明確定義哪些工作由人主導、哪些由 AI 輔助，是成功導入的關鍵。</p><h3>職責分工表<span class="hx:absolute hx:-mt-20" id=職責分工表></span>
 <a href=#%e8%81%b7%e8%b2%ac%e5%88%86%e5%b7%a5%e8%a1%a8 class=subheading-anchor aria-label="Permalink for this section"></a></h3><table><thead><tr><th>任務類型</th><th>負責方</th><th>說明</th></tr></thead><tbody><tr><td><strong>架構設計決策</strong></td><td>人</td><td>系統架構影響長期，AI 建議僅供參考</td></tr><tr><td><strong>資安邏輯</strong></td><td>人</td><td>認證、授權、加密邏輯必須人工審查</td></tr><tr><td><strong>Spec Review</strong></td><td>人（AI 輔助）</td><td>人確認需求正確性，AI 可檢查格式完整性</td></tr><tr><td><strong>Boilerplate 生成</strong></td><td>AI</td><td>CRUD、DTO、Repository 等重複性程式碼</td></tr><tr><td><strong>單元測試撰寫</strong></td><td>AI（人 review）</td><td>AI 生成覆蓋主流程的測試，人審查邊界情況</td></tr><tr><td><strong>文件生成（JSDoc/README）</strong></td><td>AI</td><td>AI 根據程式碼自動生成，人確認準確性</td></tr><tr><td><strong>Code Refactoring（小範圍）</strong></td><td>AI（人 approve）</td><td>單一函式或模組的重構，人需 approve diff</td></tr><tr><td><strong>跨系統整合設計</strong></td><td>人</td><td>涉及外部 API、第三方服務的整合決策</td></tr></tbody></table><h3>灰色地帶：需要人主導但 AI 可輔助的任務<span class="hx:absolute hx:-mt-20" id=灰色地帶需要人主導但-ai-可輔助的任務></span>
