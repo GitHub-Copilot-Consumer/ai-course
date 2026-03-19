@@ -29,23 +29,23 @@ showToc: true
 │   │
 │   ├─ 資料是否機密？
 │   │   ├─ 是 → Ollama + Codestral（完全本地）
-│   │   └─ 否 → Claude Sonnet/Opus 或 GPT-4o
+│   │   └─ 否 → Claude Sonnet/Opus 或 GPT-5.4
 │   │
-│   └─ 推薦：Claude 3.5 Sonnet（推理強、Context 200K）
+│   └─ 推薦：Claude Opus 4.6
 │
 ├─ 實作/生成（大量 Boilerplate、重複性程式碼）
 │   │
 │   ├─ 預算是否有限制？
-│   │   ├─ 是 → GPT-4o mini 或 Ollama + Llama3（低成本）
-│   │   └─ 否 → Claude Sonnet 或 GPT-4o
+│   │   ├─ 是 → GPT-5 mini 或 Ollama + GPT-OSS（低成本）
+│   │   └─ 否 → Claude Sonnet 或 GPT-5.4
 │   │
-│   └─ 推薦：GPT-4o mini（速度快、成本低）
+│   └─ 推薦：Claude Sonnet 4.6
 │
 ├─ 即時補全（寫程式時的 inline 建議）
 │   └─ 推薦：GitHub Copilot（低延遲、IDE 深度整合）
 │
 └─ 機密/合規專案（程式碼絕對不能外流）
-    └─ 推薦：Ollama + Llama3 或 Codestral（完全離線）
+    └─ 推薦：Ollama + GPT-OSS 或 Codestral（完全離線）
 ```
 
 ### 判斷條件說明
