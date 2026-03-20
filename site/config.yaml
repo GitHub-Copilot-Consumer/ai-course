@@ -31,7 +31,7 @@ menu:
 markup:
   goldmark:
     renderer:
-      # Required to allow render hooks (e.g., plantuml) to output raw HTML/SVG
+      # Required to allow render hooks to output raw HTML
       unsafe: true
 
 module:

@@ -11,7 +11,7 @@
 - [x] 2.2 轉換 `site/content/sdd/ch2-mvp-to-spec.md`
 - [x] 2.3 轉換 `site/content/sdd/ch3-openspec.md`
 - [x] 2.4 執行 `npm test`（unit）確認 mermaid.test.js 通過（Green）
-- [ ] 2.5 git commit: `feat(diagrams): convert all plantuml diagrams to mermaid`
+- [x] 2.5 git commit: `feat(diagrams): convert all plantuml diagrams to mermaid`
 
 ## 3. 移除 PlantUML 基礎設施
 
