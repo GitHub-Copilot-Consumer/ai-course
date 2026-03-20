@@ -21,5 +21,5 @@
 
 ## 4. 收尾
 
-- [ ] 4.1 更新 `README.md`，記錄 `site/layouts/partials/sidebar.html` 為 Hextra 覆寫檔及升級注意事項
+- [x] 4.1 更新 `README.md`，記錄 `site/layouts/partials/sidebar.html` 為 Hextra 覆寫檔及升級注意事項
 - [ ] 4.2 git commit: `docs: note sidebar partial override in README`

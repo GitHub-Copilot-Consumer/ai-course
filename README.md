@@ -58,6 +58,16 @@ hugo server -s site/
 # 瀏覽 http://localhost:1313
 ```
 
+### Hextra 主題覆寫（Partial Override）
+
+本專案覆寫了 Hextra 的 sidebar partial，以修正行動裝置上側欄不顯示章節連結的問題：
+
+- **覆寫檔案**：`site/layouts/partials/sidebar.html`
+- **對應上游**：`github.com/imfing/hextra@v0.12.1/layouts/_partials/sidebar.html`
+- **變更內容**：將原本兩個分離的 `<ul>`（一個 `hx:md:hidden` 行動版、一個 `hx:max-md:hidden` 桌機版）合併為單一 `<ul>`，讓章節連結在行動裝置與桌機均可見。
+
+> **升級注意**：升級 Hextra 版本後，需手動比對 `site/layouts/partials/sidebar.html` 與上游 `sidebar.html` 的差異，並重新套用本覆寫。
+
 ### 更新主題
 
 ```bash
