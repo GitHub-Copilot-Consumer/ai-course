@@ -1,6 +1,6 @@
 ---
 title: "附錄：工具安裝與環境設定"
-weight: 999
+weight: 1
 description: OpenSpec CLI、OpenCode、Ollama 的完整安裝步驟與設定指南。
 showToc: true
 ---
