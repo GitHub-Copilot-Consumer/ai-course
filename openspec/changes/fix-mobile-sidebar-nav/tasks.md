@@ -15,8 +15,8 @@
 
 ## 3. 驗證測試通過
 
-- [ ] 3.1 執行 Playwright E2E 測試：`npx playwright test mobile-sidebar-nav`，確認全部綠燈
-- [ ] 3.2 執行既有 E2E 測試套件，確認無迴歸：`npx playwright test`
+- [x] 3.1 執行 Playwright E2E 測試：`npx playwright test mobile-sidebar-nav`，確認全部綠燈
+- [x] 3.2 執行既有 E2E 測試套件，確認無迴歸：`npx playwright test`
 - [ ] 3.3 git commit: `test: verify mobile sidebar nav E2E tests pass`
 
 ## 4. 收尾
