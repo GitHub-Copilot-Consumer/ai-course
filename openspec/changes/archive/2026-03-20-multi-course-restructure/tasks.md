@@ -47,16 +47,16 @@
 
 - [x] 6.1 執行 `hugo -s site/ --minify` 確認建置無錯誤，檢查 `site/public/` 下 MUST NOT 存在 `lessons/` 目錄
 - [x] 6.2 執行 `npm test`（Jest unit tests）確認全數通過
-- [ ] 6.3 啟動 `hugo server -s site/` 後執行 Playwright E2E 測試，確認 `/sdd/`、`/agent/`、`/appendix/` 路徑均可存取
-- [ ] 6.4 人工確認：瀏覽首頁，確認兩門課程區塊、附錄連結均正確顯示
-- [ ] 6.5 人工確認：瀏覽 `/sdd/ch0-warmup/`，確認 sidebar 顯示 7 個章節（無導言），且開頭有 Agent 課程交叉連結
+- [x] 6.3 啟動 `hugo server -s site/` 後執行 Playwright E2E 測試，確認 `/sdd/`、`/agent/`、`/appendix/` 路徑均可存取
+- [x] 6.4 人工確認：瀏覽首頁，確認兩門課程區塊、附錄連結均正確顯示
+- [x] 6.5 人工確認：瀏覽 `/sdd/ch0-warmup/`，確認 sidebar 顯示 7 個章節（無導言），且開頭有 Agent 課程交叉連結
 - [x] 6.6 git commit：`test: verify multi-course structure, all tests passing`
 
 ## 7. 部署設定更新
 
 - [x] 7.1 更新 `.github/workflows/deploy.yml` 中的 `GITHUB_PAGES_URL`：將 `ai-sdd-course` 改為 `ai-courses`（完整 URL 改為 `https://github-copilot-consumer.github.io/ai-courses/`）
-- [ ] 7.2 在 GitHub UI 中將 repo 從 `ai-sdd-course` 改名為 `ai-courses`（⚠️ 手動步驟）
-- [ ] 7.3 在本地執行 `git remote set-url origin git@github-asus:GitHub-Copilot-Consumer/ai-courses.git` 更新 remote URL（⚠️ 手動步驟）
+- [x] 7.2 在 GitHub UI 中將 repo 從 `ai-sdd-course` 改名為 `ai-courses`（⚠️ 手動步驟）
+- [x] 7.3 在本地執行 `git remote set-url origin git@github-asus:GitHub-Copilot-Consumer/ai-courses.git` 更新 remote URL（⚠️ 手動步驟）
 - [x] 7.4 git commit：`ci: update deploy workflow for repo rename to ai-courses`
 
 ## 8. 收尾
