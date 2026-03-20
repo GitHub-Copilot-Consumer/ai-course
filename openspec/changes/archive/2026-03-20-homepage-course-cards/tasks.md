@@ -21,5 +21,5 @@
 ## 3. 驗證與提交
 
 - [x] 3.1 執行 E2E 測試，確認所有測試通過（綠燈）
-- [ ] 3.2 git commit（conventional commit）：`feat: replace homepage course list with feature cards`
-- [ ] 3.3 同步更新 `README.md`（若有課程首頁相關描述需更新）
+- [x] 3.2 git commit（conventional commit）：`feat: replace homepage course list with feature cards`
+- [x] 3.3 同步更新 `README.md`（若有課程首頁相關描述需更新）
