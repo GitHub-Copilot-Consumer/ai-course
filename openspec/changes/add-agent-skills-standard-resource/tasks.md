@@ -17,5 +17,5 @@
 
 ## 3. Commit
 
-- [ ] 3.1 使用 conventional commit 格式提交：`docs(resources): add agent-skills-standard resource page`
+- [x] 3.1 使用 conventional commit 格式提交：`docs(resources): add agent-skills-standard resource page`
 - [x] 3.2 同步更新 README.md（若有課程資源列表需更新）
