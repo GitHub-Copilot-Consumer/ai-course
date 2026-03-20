@@ -6,7 +6,7 @@
  */
 const { test, expect } = require('@playwright/test');
 
-const LESSON_URL = '/lessons/ch0-warmup/';
+const LESSON_URL = '/sdd/ch0-warmup/';
 
 test.describe('Presentation Mode - E2E', () => {
   test.beforeEach(async ({ page }) => {
