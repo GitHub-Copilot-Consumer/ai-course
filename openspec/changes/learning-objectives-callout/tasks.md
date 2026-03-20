@@ -29,4 +29,4 @@
 
 - [x] 4.1 執行 `npm test` 確認所有測試通過（包含 1.1、1.2 新增的測試，綠燈）
 - [x] 4.2 確認 Presentation Mode 在 SDD ch0、ch1 正常切換 slide（學習目標 callout 不影響 `<hr>` 切割點）
-- [ ] 4.3 `git add` + `git commit`（conventional commit：`feat(content): wrap 學習目標 in callout shortcode across all 14 chapters`）
+- [x] 4.3 `git add` + `git commit`（conventional commit：`feat(content): wrap 學習目標 in callout shortcode across all 14 chapters`）
