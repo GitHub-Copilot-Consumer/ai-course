@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  GITHUB_PAGES_URL: https://github-copilot-consumer.github.io/ai-sdd-course/
+  GITHUB_PAGES_URL: https://github-copilot-consumer.github.io/ai-courses/
 
 jobs:
   deploy:
